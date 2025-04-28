@@ -1,0 +1,32 @@
+{% extends 'email/base.html' %}
+
+{% block content %}
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h2 style="color: #333;">[Staff] {{ notification_type|title }} - {{ appointment.title }}</h2>
+    
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3 style="margin-top: 0;">Appointment Details</h3>
+        <p><strong>Client:</strong> {{ appointment.client.get_full_name }}</p>
+        <p><strong>Date & Time:</strong> {{ appointment.date_time|date:"F d, Y h:i A" }}</p>
+        <p><strong>Duration:</strong> {{ appointment.duration }} minutes</p>
+        <p><strong>Location:</strong> {{ appointment.location }}</p>
+        {% if appointment.case %}
+        <p><strong>Related Case:</strong> {{ appointment.case.title }}</p>
+        {% endif %}
+        <p><strong>Status:</strong> {{ appointment.get_status_display }}</p>
+    </div>
+
+    {% if appointment.notes %}
+    <div style="margin-top: 20px;">
+        <h3>Notes</h3>
+        <p>{{ appointment.notes|linebreaks }}</p>
+    </div>
+    {% endif %}
+
+    <div style="margin-top: 20px;">
+        <p>Client Contact Information:</p>
+        <p>Phone: {{ appointment.client.phone }}</p>
+        <p>Email: {{ appointment.client.email }}</p>
+    </div>
+</div>
+{% endblock %}

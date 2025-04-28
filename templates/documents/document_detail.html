@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ document.title }} - Legal Management System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-0">Document Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>{{ document.title }}</h3>
+                    <p class="text-muted">{{ document.description }}</p>
+                    
+                    <dl class="row">
+                        <dt class="col-sm-3">Case</dt>
+                        <dd class="col-sm-9">{% if document.case %}{{ document.case }}{% else %}N/A{% endif %}</dd>
+                        
+                        <dt class="col-sm-3">Uploaded By</dt>
+                        <dd class="col-sm-9">{{ document.uploaded_by.username }}</dd>
+                        
+                        <dt class="col-sm-3">Upload Date</dt>
+                        <dd class="col-sm-9">{{ document.uploaded_at|date:"F d, Y H:i" }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-grid gap-2">
+                        <a href="{{ document.file.url }}" class="btn btn-primary" download>
+                            <i class="fas fa-download me-2"></i>Download Document
+                        </a>
+                        <a href="{% url 'documents:document_delete' document.pk %}" class="btn btn-danger">
+                            <i class="fas fa-trash me-2"></i>Delete Document
+                        </a>
+                        <a href="{% url 'documents:document_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

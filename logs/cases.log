@@ -1,0 +1,9 @@
+2025-04-16 22:33:09,952 - cases - ERROR - Failed to queue filing notification for case 1: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-04-27 19:23:13,056 - cases - ERROR - Failed to queue filing notification for case 3: send_case_notification_task() takes 2 positional arguments but 5 were given
+2025-04-27 19:34:39,339 - cases - ERROR - Failed to queue update notification for case 2: send_case_notification_task() takes 2 positional arguments but 5 were given
+2025-04-27 19:34:47,370 - cases - ERROR - Failed to queue update notification for case 1: send_case_notification_task() takes 2 positional arguments but 5 were given
+2025-04-27 19:41:34,646 - cases - ERROR - Failed to queue update notification for case 3: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-04-27 19:41:36,963 - cases - ERROR - Failed to queue update notification for case 3: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-04-27 19:41:51,047 - cases - ERROR - Failed to queue update notification for case 2: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-04-27 19:42:07,213 - cases - ERROR - Failed to queue update notification for case 1: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-04-27 19:58:18,231 - cases - ERROR - Failed to queue update notification for case 3: [WinError 10061] No connection could be made because the target machine actively refused it

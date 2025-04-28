@@ -1,0 +1,21 @@
+{% extends 'email/base_email.html' %}
+
+{% block content %}
+<h2>New Appointment Scheduled</h2>
+<div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>Appointment Details</h3>
+    <p><strong>Title:</strong> {{ appointment.title }}</p>
+    <p><strong>Date & Time:</strong> {{ appointment.date_time|date:"F d, Y h:i A" }}</p>
+    <p><strong>Duration:</strong> {{ appointment.duration }} minutes</p>
+    <p><strong>Location:</strong> {{ appointment.location }}</p>
+    {% if appointment.case %}
+    <p><strong>Related Case:</strong> {{ appointment.case.title }}</p>
+    {% endif %}
+</div>
+
+<p>Please add this appointment to your calendar. If you need to make any changes, please contact us.</p>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ appointment_url }}" class="button">View Appointment Details</a>
+</div>
+{% endblock %}

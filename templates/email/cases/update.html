@@ -1,0 +1,28 @@
+{% extends 'email/base_email.html' %}
+
+{% block content %}
+<h2>Case Update: {{ case.title }}</h2>
+<p>There has been an update to your case:</p>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>Case Details</h3>
+    <p><strong>Case Number:</strong> {{ case.number }}</p>
+    <p><strong>Status:</strong> {{ case.get_status_display }}</p>
+    <p><strong>Last Updated:</strong> {{ case.updated_at|date:"F d, Y" }}</p>
+    
+    {% if case.next_hearing_date %}
+    <p><strong>Next Hearing:</strong> {{ case.next_hearing_date|date:"F d, Y" }}</p>
+    {% endif %}
+    
+    {% if update_description %}
+    <div style="margin-top: 15px;">
+        <h4>Update Description</h4>
+        <p>{{ update_description|linebreaks }}</p>
+    </div>
+    {% endif %}
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ case_url }}" class="button">View Case Details</a>
+</div>
+{% endblock %}

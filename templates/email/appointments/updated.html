@@ -1,0 +1,24 @@
+{% extends 'email/base_email.html' %}
+
+{% block content %}
+<h2>Appointment Updated</h2>
+<p>Your appointment has been updated with the following details:</p>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>Updated Appointment Details</h3>
+    <p><strong>Title:</strong> {{ appointment.title }}</p>
+    <p><strong>Date & Time:</strong> {{ appointment.date_time|date:"F d, Y h:i A" }}</p>
+    <p><strong>Duration:</strong> {{ appointment.duration }} minutes</p>
+    <p><strong>Location:</strong> {{ appointment.location }}</p>
+    {% if appointment.case %}
+    <p><strong>Related Case:</strong> {{ appointment.case.title }}</p>
+    {% endif %}
+    <p><strong>Status:</strong> {{ appointment.get_status_display }}</p>
+</div>
+
+<p>Please update this appointment in your calendar. If you have any questions, please contact us.</p>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ appointment_url }}" class="button">View Updated Appointment</a>
+</div>
+{% endblock %}

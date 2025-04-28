@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Welcome, {{ request.user.username }}</h2>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Cases</h5>
+                </div>
+                <div class="card-body">
+                    {% if recent_cases %}
+                        <ul class="list-unstyled">
+                        {% for case in recent_cases %}
+                            <li class="mb-2">
+                                <a href="{% url 'cases:case_detail' case.pk %}">{{ case.title }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No recent cases</p>
+                    {% endif %}
+                    <a href="{% url 'cases:case_list' %}" class="btn btn-primary btn-sm">View All Cases</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Upcoming Appointments</h5>
+                </div>
+                <div class="card-body">
+                    {% if upcoming_appointments %}
+                        <ul class="list-unstyled">
+                        {% for appointment in upcoming_appointments %}
+                            <li class="mb-2">
+                                <a href="{% url 'appointments:appointment_detail' appointment.pk %}">
+                                    {{ appointment.title }} - {{ appointment.date_time|date:"M d, Y" }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No upcoming appointments</p>
+                    {% endif %}
+                    <a href="{% url 'appointments:appointment_list' %}" class="btn btn-primary btn-sm">View All Appointments</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Clients</h5>
+                </div>
+                <div class="card-body">
+                    {% if recent_clients %}
+                        <ul class="list-unstyled">
+                        {% for client in recent_clients %}
+                            <li class="mb-2">
+                                <a href="{% url 'clients:client_detail' client.pk %}">{{ client.name }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No recent clients</p>
+                    {% endif %}
+                    <a href="{% url 'clients:client_list' %}" class="btn btn-primary btn-sm">View All Clients</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

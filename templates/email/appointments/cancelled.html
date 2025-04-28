@@ -1,0 +1,22 @@
+{% extends 'email/base_email.html' %}
+
+{% block content %}
+<h2>Appointment Cancelled</h2>
+<p>The following appointment has been cancelled:</p>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>Cancelled Appointment Details</h3>
+    <p><strong>Title:</strong> {{ appointment.title }}</p>
+    <p><strong>Originally Scheduled:</strong> {{ appointment.date_time|date:"F d, Y h:i A" }}</p>
+    <p><strong>Location:</strong> {{ appointment.location }}</p>
+    {% if appointment.case %}
+    <p><strong>Related Case:</strong> {{ appointment.case.title }}</p>
+    {% endif %}
+</div>
+
+<p>Please remove this appointment from your calendar. If you would like to reschedule, please contact our office.</p>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ schedule_url }}" class="button">Schedule New Appointment</a>
+</div>
+{% endblock %}

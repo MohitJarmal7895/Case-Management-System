@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}{{ action }} Case - Legal Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{{ action }} Case</h2>
+    <a href="{% url 'cases:case_list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                        {{ form.title|add_class:"form-control" }}
+                        {{ form.title.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.case_number.id_for_label }}" class="form-label">Case Number</label>
+                        {{ form.case_number|add_class:"form-control" }}
+                        {{ form.case_number.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.client.id_for_label }}" class="form-label">Client</label>
+                        {{ form.client|add_class:"form-control" }}
+                        {{ form.client.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.assigned_attorney.id_for_label }}" class="form-label">Assigned Attorney</label>
+                        {{ form.assigned_attorney|add_class:"form-control" }}
+                        {{ form.assigned_attorney.errors }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                        {{ form.status|add_class:"form-control" }}
+                        {{ form.status.errors }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.filing_date.id_for_label }}" class="form-label">Filing Date</label>
+                        {% comment %} {{ form.filing_date|add_class:"form-control" |add_class="datetime-local" }} {% endcomment %}
+                        {{ form.filing_date.errors }}
+                        {% render_field form.filing_date class="form-control" type="date" %}
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.court_name.id_for_label }}" class="form-label">Court Name</label>
+                        {{ form.court_name|add_class:"form-control" }}
+                        {{ form.court_name.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                {{ form.description|add_class:"form-control" }}
+                {{ form.description.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary">{{ action }} Case</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

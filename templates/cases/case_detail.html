@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ case.title }} - Case Details{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Case Details</h2>
+    <div>
+        <a href="{% url 'cases:case_update' case.pk %}" class="btn btn-warning">Edit Case</a>
+        <a href="{% url 'cases:case_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Case Information</h5>
+                <dl class="row">
+                    <dt class="col-sm-4">Case Number</dt>
+                    <dd class="col-sm-8">{{ case.case_number }}</dd>
+
+                    <dt class="col-sm-4">Title</dt>
+                    <dd class="col-sm-8">{{ case.title }}</dd>
+
+                    <dt class="col-sm-4">Status</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge bg-{% if case.status == 'OPEN' %}primary{% elif case.status == 'PENDING' %}warning{% else %}success{% endif %}">
+                            {{ case.status }}
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-4">Filing Date</dt>
+                    <dd class="col-sm-8">{{ case.filing_date }}</dd>
+
+                    <dt class="col-sm-4">Court Name</dt>
+                    <dd class="col-sm-8">{{ case.court_name }}</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <h5>Related Information</h5>
+                <dl class="row">
+                    <dt class="col-sm-4">Client</dt>
+                    <dd class="col-sm-8">
+                        <a href="{% url 'clients:client_detail' case.client.pk %}">
+                            {{ case.client.first_name }} {{ case.client.last_name }}
+                        </a>
+                    </dd>
+
+                    <dt class="col-sm-4">Attorney</dt>
+                    <dd class="col-sm-8">{{ case.assigned_attorney }}</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h5>Case Description</h5>
+            <p>{{ case.description|linebreaks }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Related Documents</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for document in case.document_set.all %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0">{{ document.title }}</h6>
+                                <small class="text-muted">{{ document.document_type }}</small>
+                            </div>
+                            <a href="{{ document.file.url }}" class="btn btn-sm btn-primary">Download</a>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">No documents available</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Upcoming Appointments</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for appointment in case.appointment_set.all %}
+                    <li class="list-group-item">
+                        <h6 class="mb-0">{{ appointment.title }}</h6>
+                        <small class="text-muted">{{ appointment.date_time|date:"F d, Y H:i" }}</small>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">No upcoming appointments</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

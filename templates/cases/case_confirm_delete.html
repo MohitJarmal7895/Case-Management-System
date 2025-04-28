@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Case - Legal Management System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-danger">Delete Case</h3>
+        <p>Are you sure you want to delete the following case?</p>
+        
+        <dl class="row mt-4">
+            <dt class="col-sm-3">Case Number</dt>
+            <dd class="col-sm-9">{{ case.case_number }}</dd>
+
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">{{ case.title }}</dd>
+
+            <dt class="col-sm-3">Client</dt>
+            <dd class="col-sm-9">{{ case.client.first_name }} {{ case.client.last_name }}</dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">{{ case.status }}</dd>
+        </dl>
+
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            Warning: This action cannot be undone. All related documents and appointments will also be deleted.
+        </div>
+        
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'cases:case_detail' case.pk %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

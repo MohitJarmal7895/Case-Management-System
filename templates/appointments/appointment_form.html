@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}{{ action }} Appointment - Legal Management System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ action }} Appointment</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                    {{ form.title.errors }}
+                    {% render_field form.title class="form-control" %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.client.id_for_label }}" class="form-label">Client</label>
+                    {{ form.client.errors }}
+                    {% render_field form.client class="form-control" %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.case.id_for_label }}" class="form-label">Related Case</label>
+                    {{ form.case.errors }}
+                    {% render_field form.case class="form-control" %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.date_time.id_for_label }}" class="form-label">Date & Time</label>
+                    {{ form.date_time.errors }}
+                    {% render_field form.date_time class="form-control" type="datetime-local" %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                    {{ form.status.errors }}
+                    {% render_field form.status class="form-control" %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                    {{ form.description.errors }}
+                    {% render_field form.description class="form-control" rows="4" %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">{{ action }} Appointment</button>
+                <a href="{% url 'appointments:appointment_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

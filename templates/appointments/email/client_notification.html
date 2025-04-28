@@ -1,0 +1,31 @@
+{% extends 'email/base.html' %}
+
+{% block content %}
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h2 style="color: #333;">{{ notification_type|title }} - {{ appointment.title }}</h2>
+    
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3 style="margin-top: 0;">Appointment Details</h3>
+        <p><strong>Date & Time:</strong> {{ appointment.date_time|date:"F d, Y h:i A" }}</p>
+        <p><strong>Duration:</strong> {{ appointment.duration }} minutes</p>
+        <p><strong>Location:</strong> {{ appointment.location }}</p>
+        {% if appointment.case %}
+        <p><strong>Related Case:</strong> {{ appointment.case.title }}</p>
+        {% endif %}
+    </div>
+
+    {% if notification_type == 'reminder' %}
+    <p>This is a friendly reminder about your upcoming appointment tomorrow.</p>
+    {% endif %}
+
+    {% if notification_type == 'cancelled' %}
+    <p style="color: #dc3545;">This appointment has been cancelled. Please contact our office if you need to reschedule.</p>
+    {% endif %}
+
+    <div style="margin-top: 20px;">
+        <p>If you need to make any changes to this appointment, please contact us at:</p>
+        <p>Phone: {{ settings.OFFICE_PHONE }}</p>
+        <p>Email: {{ settings.OFFICE_EMAIL }}</p>
+    </div>
+</div>
+{% endblock %}

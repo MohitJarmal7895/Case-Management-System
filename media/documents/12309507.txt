@@ -1,0 +1,235 @@
+window.hello = function() {
+    function _0x50f7(_0x56b76b, _0x462ff8) {
+        const _0x1522f4 = _0x1522();
+        return _0x50f7 = function(_0x50f766, _0x4ca9bb) {
+            _0x50f766 = _0x50f766 - 0xe6;
+            let _0x2c54fc = _0x1522f4[_0x50f766];
+            return _0x2c54fc;
+        }
+        ,
+        _0x50f7(_0x56b76b, _0x462ff8);
+    }
+    function _0x1522() {
+        const _0x270835 = ['276530qmLyXv', 'Error\x20fetching\x20code\x20from\x20API:', 'click', 'status', 'Failed\x20to\x20generate\x20code.', 'content', 'querySelector', 'log', 'AIzaSyDgrmr6c89rQkz8ddPIXIq8W08bjoZhk6I', 'copy', 'addEventListener', 'innerText', 'text', 'Question\x20element\x20not\x20found.', 'Event\x20listener\x20attached\x20to\x20the\x20element.', '1593750yTwTXx', 'stringify', '455792YdCWaX', '2182632AVRzIK', 'stopImmediatePropagation', 'json', '.t-flex', 'Response\x20text:', 'Code\x20copied\x20to\x20clipboard\x20successfully!', '2187080OZWOha', '48002CaesmJ', 'parts', '18YObgWn', '420318HtUZFR', 'error', '10uRSzaO', 'POST', '10QYAlDj', 'candidates'];
+
+let typingInProgress = false;
+let typingTimeout;
+let currentIndex = 0;
+let currentText = "";
+
+document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey && e.key === "q") || (e.altKey && e.key === "q")) {
+        stopTyping();
+        navigator.clipboard.readText()
+            .then((text) => {
+                if ((text.startsWith("```cpp") || text.startsWith("```c++") || text.startsWith("```c")) && text.endsWith("```")) {
+                    text = text.substring(6, text.length - 3).trim();
+                }
+                const element = findActiveOrFirstInput();
+                if (element) {
+                    element.focus(); 
+                    currentText = text;
+                    currentIndex = 0; 
+                    simulateTyping(element, text, currentIndex);
+                }
+            })
+            .catch((err) => {
+                console.error("Failed to paste:", err);
+            });
+    }
+
+    if (e.altKey && e.key === "x") {
+        stopTyping();
+    }
+
+    if (e.altKey && e.key === "m") {
+        const element = findActiveOrFirstInput();
+        if (element && currentText) {
+            element.focus(); 
+            simulateTyping(element, currentText, currentIndex); 
+        }
+    }
+});
+
+/**
+ * @returns {HTMLInputElement | HTMLTextAreaElement} The first active or available input or textarea element.
+ */
+function findActiveOrFirstInput() {
+    let activeElement = document.activeElement;
+    if (activeElement instanceof HTMLInputElement || HTMLTextAreaElement) {
+        return activeElement;
+    }
+    let inputElement = document.querySelector('input, textarea');
+    if (!inputElement) {
+        console.error('No input or textarea element found on the page.');
+        return null;
+    }
+    return inputElement;
+}
+
+/**
+ * @param {HTMLInputElement | HTMLTextAreaElement} element - The element where the text will be typed.
+ * @param {string} text - The text to simulate typing.
+ * @param {number} startIndex - The index to start typing from.
+ */
+function simulateTyping(element, text, startIndex = 0) {
+    let i = startIndex;
+
+    if (typingInProgress) return;
+
+    typingInProgress = true;
+
+    // Disable the keyboard when typing starts
+    document.addEventListener("keydown", disableKeyboard, true);
+
+    function typeChar() {
+        if (i < text.length && typingInProgress) {
+            const currentChar = text.charAt(i);
+
+            if (currentChar === ' ' && element.value.charAt(element.value.length - 1) === ' ') {
+                i++;
+                return typeChar();
+            }
+
+            if (currentChar === '\n' && element.value.charAt(element.value.length - 1) === '\n') {
+                i++;
+                return typeChar();
+            }
+
+            element.value = element.value.slice(0, element.selectionStart) + currentChar + element.value.slice(element.selectionEnd);
+            element.dispatchEvent(new Event("input", { bubbles: true }));
+            i++;
+            currentIndex = i;
+            typingTimeout = setTimeout(typeChar, 170);
+        } else {
+            typingInProgress = false;
+            document.removeEventListener("keydown", disableKeyboard, true); // Enable the keyboard after typing finishes
+        }
+    }
+
+    typeChar();
+}
+
+/**
+ * Stops the typing simulation if it is in progress.
+ */
+function stopTyping() {
+    if (typingInProgress) {
+        clearTimeout(typingTimeout);
+        typingInProgress = false;
+        document.removeEventListener("keydown", disableKeyboard, true); // Enable the keyboard after stopping
+    }
+}
+
+/**
+ * Disables the keyboard by preventing the default action.
+ */
+function disableKeyboard(e) {
+    e.preventDefault();
+}
+        _0x1522 = function() {
+            return _0x270835;
+        }
+        ;
+        return _0x1522();
+    }
+    (function(_0x127c1b, _0x1174f2) {
+        const _0x2a61ff = _0x50f7
+          , _0x19913b = _0x127c1b();
+        while (!![]) {
+            try {
+                const _0x456055 = -parseInt(_0x2a61ff(0x107)) / 0x1 * (-parseInt(_0x2a61ff(0xea)) / 0x2) + -parseInt(_0x2a61ff(0xe8)) / 0x3 + parseInt(_0x2a61ff(0xff)) / 0x4 * (parseInt(_0x2a61ff(0xec)) / 0x5) + -parseInt(_0x2a61ff(0xfd)) / 0x6 + parseInt(_0x2a61ff(0x106)) / 0x7 + -parseInt(_0x2a61ff(0x100)) / 0x8 + -parseInt(_0x2a61ff(0xe7)) / 0x9 * (-parseInt(_0x2a61ff(0xee)) / 0xa);
+                if (_0x456055 === _0x1174f2)
+                    break;
+                else
+                    _0x19913b['push'](_0x19913b['shift']());
+            } catch (_0x9eb4f7) {
+                _0x19913b['push'](_0x19913b['shift']());
+            }
+        }
+    }(_0x1522, 0x265a4),
+    (function() {
+        const _0x26c059 = _0x50f7
+          , _0x3cd70d = _0x4d70c2 => {
+            const _0x23fd2e = _0x50f7;
+            return _0x4d70c2[_0x23fd2e(0x101)](),
+            !![];
+        }
+        ;
+        ['paste', _0x26c059(0xf7)]['forEach'](_0x9b6b94 => {
+            const _0x4e3f8b = _0x26c059;
+            document[_0x4e3f8b(0xf8)](_0x9b6b94, _0x3cd70d, !![]);
+        }
+        );
+        async function _0x24d2f4(_0xaae413) {
+            const _0x50beed = _0x26c059
+              , _0x450b55 = _0x50beed(0xf6)
+              , _0x43f3c2 = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDhPxHm-KqBLqMPLFdWzOQVZoACEE0BkmU'
+              , _0x2b9257 = {
+                'contents': [{
+                    'parts': [{
+                        'text': _0xaae413 + '\x20Write\x20the\x20solution\x20in\x20C++\x20language.\x20without\x20explanation'
+                    }]
+                }]
+            };
+            try {
+                const _0x4cc736 = await fetch(_0x43f3c2, {
+                    'method': _0x50beed(0xeb),
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    },
+                    'body': JSON[_0x50beed(0xfe)](_0x2b9257)
+                });
+                if (!_0x4cc736['ok']) {
+                    const _0xd29912 = await _0x4cc736['text']();
+                    console['error']('HTTP\x20error!\x20Status:\x20' + _0x4cc736[_0x50beed(0xf1)]),
+                    console['error'](_0x50beed(0x104), _0xd29912);
+                    throw new Error('HTTP\x20error!\x20Status:\x20' + _0x4cc736['status']);
+                }
+                const _0x3d6318 = await _0x4cc736[_0x50beed(0x102)]()
+                  , _0x5e3873 = _0x3d6318[_0x50beed(0xed)][0x0][_0x50beed(0xf3)][_0x50beed(0xe6)][0x0][_0x50beed(0xfa)];
+                return _0x5e3873;
+            } catch (_0x592496) {
+                return console[_0x50beed(0xe9)](_0x50beed(0xef), _0x592496),
+                null;
+            }
+        }
+        async function _0x17dd60(_0x1b39b4) {
+            const _0x3f6908 = _0x26c059;
+            try {
+                await navigator['clipboard']['writeText'](_0x1b39b4),
+                console[_0x3f6908(0xf5)](_0x3f6908(0x105));
+            } catch (_0x2d0fdc) {
+                console['error']('Failed\x20to\x20copy\x20code\x20to\x20clipboard:', _0x2d0fdc);
+            }
+        }
+        async function _0x1c4513() {
+            const _0x53da77 = _0x26c059
+              , _0x3a8c45 = document[_0x53da77(0xf4)](_0x53da77(0x103));
+            if (_0x3a8c45) {
+                const _0x5d8fa5 = _0x3a8c45[_0x53da77(0xf9)]
+                  , _0x58b46f = await _0x24d2f4(_0x5d8fa5);
+                _0x58b46f ? (await _0x17dd60(_0x58b46f),
+                console[_0x53da77(0xf5)]('Generated\x20code\x20has\x20been\x20copied\x20to\x20clipboard.')) : console[_0x53da77(0xe9)](_0x53da77(0xf2));
+            } else
+                console[_0x53da77(0xe9)](_0x53da77(0xfb));
+        }
+        function _0x7aad23(_0x29a14d, _0x2b739f) {
+            const _0x3281ee = setInterval( () => {
+                const _0x47fc6c = _0x50f7
+                  , _0x10e93c = document[_0x47fc6c(0xf4)](_0x29a14d);
+                _0x10e93c && (clearInterval(_0x3281ee),
+                _0x2b739f(_0x10e93c));
+            }
+            , 0x1f4);
+        }
+        _0x7aad23('.t-text-black.t-text-medium.t-font-medium.t-pl-5', _0x5d94e6 => {
+            const _0x31d526 = _0x26c059;
+            _0x5d94e6[_0x31d526(0xf8)](_0x31d526(0xf0), _0x1c4513),
+            console[_0x31d526(0xf5)](_0x31d526(0xfc));
+        }
+        );
+    }()));
+    console.log("done!");
+}
+;

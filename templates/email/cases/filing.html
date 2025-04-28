@@ -1,0 +1,35 @@
+{% extends 'email/base_email.html' %}
+
+{% block content %}
+<h2>New Case Filing</h2>
+<p>A new case has been filed in our system:</p>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>Case Information</h3>
+    <p><strong>Case Title:</strong> {{ case.title }}</p>
+    <p><strong>Case Number:</strong> {{ case.number }}</p>
+    <p><strong>Filing Date:</strong> {{ case.created_at|date:"F d, Y" }}</p>
+    <p><strong>Type:</strong> {{ case.get_case_type_display }}</p>
+    <p><strong>Status:</strong> {{ case.get_status_display }}</p>
+    
+    {% if case.description %}
+    <div style="margin-top: 15px;">
+        <h4>Case Description</h4>
+        <p>{{ case.description|linebreaks }}</p>
+    </div>
+    {% endif %}
+    
+    {% if case.next_steps %}
+    <div style="margin-top: 15px;">
+        <h4>Next Steps</h4>
+        <p>{{ case.next_steps|linebreaks }}</p>
+    </div>
+    {% endif %}
+</div>
+
+<p>Our legal team will keep you updated on any developments in your case.</p>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{{ case_url }}" class="button">View Case Details</a>
+</div>
+{% endblock %}

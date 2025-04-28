@@ -1,0 +1,3 @@
+@echo off
+echo Starting Flower monitoring...
+celery -A legal_management flower --port=5555

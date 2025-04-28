@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Email Notification Dashboard</h2>
+    
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Total</h5>
+                    <h2>{{ stats.total }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Opened</h5>
+                    <h2>{{ stats.opened }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5 class="card-title">Clicked</h5>
+                    <h2>{{ stats.clicked }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Failed</h5>
+                    <h2>{{ stats.failed }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Table -->
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Case</th>
+                        <th>Type</th>
+                        <th>Recipient</th>
+                        <th>Sent At</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for notification in notifications %}
+                    <tr>
+                        <td>{{ notification.case.title }}</td>
+                        <td>{{ notification.notification_type }}</td>
+                        <td>{{ notification.recipient }}</td>
+                        <td>{{ notification.sent_at }}</td>
+                        <td>
+                            <span class="badge {% if notification.status == 'SENT' %}bg-success
+                                           {% elif notification.status == 'FAILED' %}bg-danger
+                                           {% elif notification.status == 'OPENED' %}bg-info
+                                           {% elif notification.status == 'CLICKED' %}bg-primary
+                                           {% else %}bg-secondary{% endif %}">
+                                {{ notification.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
